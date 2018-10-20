@@ -1,14 +1,13 @@
 {
-    "name": "Getting Started Example",
+    "name": "Chrome Tab Renamer",
     "version": "1.0",
-    "description": "Build an Extension!",
+    "description": "Chrome Tab Renamer allows you to update the name of tabs in your browser.",
     "permissions": ["storage", "declarativeContent", "activeTab"],
-    "options_page": "options.html",
     "background": {
       "scripts": ["background.js"],
       "persistent": false
     },
-    "page_action": {
+    "browser_action": {
       "default_popup": "popup.html",
       "default_icon": {
         "16": "images/get_started16.png",
