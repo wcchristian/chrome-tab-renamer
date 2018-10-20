@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      button {
-        height: 30px;
-        width: 100px;
-        outline: none;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="popup.css">
   </head>
   <body>
-    <p id="title"></p>
-    <button id="changeNameButton">Change Tab Name</button>
+    <form id="tabForm">
+      <input placeholder="Enter Tab Name..." id="tabNameInput" type="text" autofocus>
+      <div class="buttonContainer">
+        <button id="changeNameButton" type="submit">Change Tab Name</button>
+      </div>
+    </form>
     <script src="popup.js"></script>
   </body>
 </html>
