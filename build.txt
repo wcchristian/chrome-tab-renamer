@@ -1,0 +1,11 @@
+images/logo_16.png
+images/logo_32.png
+images/logo_48.png
+images/logo_128.png
+background.js
+content.js
+manifest.json
+options.js
+popup.css
+popup.html
+popup.js
