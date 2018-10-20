@@ -15,3 +15,7 @@ function omniboxListener(title) {
 
 chrome.omnibox.onInputChanged.addListener(omniboxListener);
 chrome.runtime.onMessage.addListener(listener);
+
+chrome.runtime.onInstalled.addListener(function() {
+  alert("Please reload each tab or restart your browser after installation of Chrome Tab Renamer");
+});
