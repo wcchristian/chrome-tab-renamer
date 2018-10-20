@@ -2,10 +2,19 @@
     "name": "Chrome Tab Renamer",
     "version": "1.0",
     "description": "Chrome Tab Renamer allows you to update the name of tabs in your browser.",
-    "permissions": ["storage", "declarativeContent", "activeTab"],
+    "permissions": ["activeTab"],
     "background": {
       "scripts": ["background.js"],
       "persistent": false
+    },
+    "omnibox": {"keyword": "ctr"},
+    "commands": {
+      "_execute_browser_action": {
+        "suggested_key": {
+          "default": "Ctrl+E",
+          "mac": "Command+E"
+        }
+      }
     },
     "browser_action": {
       "default_popup": "popup.html",
@@ -16,6 +25,12 @@
         "128": "images/get_started128.png"
       }
     },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],  
     "icons": {
       "16": "images/get_started16.png",
       "32": "images/get_started32.png",
