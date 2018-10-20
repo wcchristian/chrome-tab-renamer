@@ -8,6 +8,14 @@
       "persistent": false
     },
     "omnibox": {"keyword": "ctr"},
+    "commands": {
+      "_execute_browser_action": {
+        "suggested_key": {
+          "default": "Ctrl+E",
+          "mac": "Command+E"
+        }
+      }
+    },
     "browser_action": {
       "default_popup": "popup.html",
       "default_icon": {

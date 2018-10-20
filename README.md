@@ -14,6 +14,9 @@ For practice, I included the chrome extension tutorial in the tutorial folder of
 ## Omnibox
 This chrome extension can make use of the omnibox with the prefix ctr
 
+## Hotkey
+The default chrome hotkey is Ctrl/Command+E
+
 # Screenshots
 Named Tabs
 
