@@ -6,21 +6,18 @@ changeNameButton.onclick = function(element) {
   changeTabName();
 };
 
-document.onload(function() {
+document.onload = function() {
   form.addEventListener('keyup', function(data) {
     if(data.keyCode === 13) {
       changeTabName();
     }
   })
-})
+}
 
 function changeTabName() {
   let title = tabNameElem.value;
   console.log(tabNameElem.value);
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.executeScript(
-      tabs[0].id,
-      {code: 'document.title = "'+title+'"'} 
-    );
+    chrome.runtime.sendMessage({tabId: tabs[0].id, title: title});
   });
 }
