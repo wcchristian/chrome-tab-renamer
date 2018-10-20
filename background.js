@@ -33,15 +33,17 @@ function omniboxTrackingListener(title) {
 }
 
 function persistTab(tabId, title) {
-  let tabs = sessionStorage.getItem("tabs");
-  if(!tabs) {
-      tabs = {};
-  }
+  chrome.storage.sync.get('tabs', function(elem) {
+    let tabs = elem.tabs
+    if(!tabs) {
+        tabs = {};
+    }
 
-  tabs[tabId] = title;
-
-  chrome.storage.sync.set({tabs: tabs}, function() {
-    console.log('Chrome Tab Renamer: The Tab is stored');
+    tabs[tabId] = title;
+    
+    chrome.storage.sync.set({tabs: tabs}, function() {
+      console.log('Chrome Tab Renamer: The Tab is stored');
+    });
   });
 }
 

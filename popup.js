@@ -13,11 +13,16 @@ _gaq.push(['_trackPageview']);
 let changeNameButton = document.getElementById('changeNameButton')
 let tabNameElem = document.getElementById("tabNameInput");
 let form = document.getElementById("tabForm");
+let removeButton = document.getElementById("removeButton");
 
 // Event Functions
 changeNameButton.onclick = function(element) {
   changeTabName();
 };
+
+removeButton.onclick = function(element) {
+  removeAndRefresh();
+}
 
 document.onload = function() {
   form.addEventListener('keyup', function(data) {
@@ -34,4 +39,26 @@ function changeTabName() {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.runtime.sendMessage({tabId: tabs[0].id, title: title});
   });
+}
+
+function removeAndRefresh() {
+  _gaq.push(['_trackEvent', 'removeAndRefresh', "popup"]);
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    let tabId = tabs[0].id;
+
+    chrome.storage.sync.get('tabs', function(elem) {
+      let tabs = elem.tabs
+      delete tabs[tabId];
+      
+      chrome.storage.sync.set({tabs: tabs}, function() {
+        console.log('Chrome Tab Renamer: The Tab is removed');
+          refreshPage(tabId);
+      });
+    });
+  });
+}
+
+function refreshPage(tabId) {
+  var code = 'window.location.reload();';
+  chrome.tabs.executeScript(tabId, {code: code});
 }
