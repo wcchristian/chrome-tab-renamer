@@ -14,6 +14,8 @@ let changeNameButton = document.getElementById('changeNameButton')
 let tabNameElem = document.getElementById("tabNameInput");
 let form = document.getElementById("tabForm");
 let removeButton = document.getElementById("removeButton");
+let persistCheckbox = document.getElementById("persistBox");
+let shouldPersist = true;
 
 // Event Functions
 changeNameButton.onclick = function(element) {
@@ -22,6 +24,10 @@ changeNameButton.onclick = function(element) {
 
 removeButton.onclick = function(element) {
   removeAndRefresh();
+}
+
+persistCheckbox.onchange = function(element) {
+  shouldPersist = persistCheckbox.checked
 }
 
 document.onload = function() {
@@ -37,7 +43,7 @@ function changeTabName() {
   let title = tabNameElem.value;
   console.log(tabNameElem.value);
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.runtime.sendMessage({tabId: tabs[0].id, title: title});
+    chrome.runtime.sendMessage({tabId: tabs[0].id, title: title, shouldPersist: shouldPersist});
   });
 }
 

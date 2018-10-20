@@ -12,7 +12,9 @@ _gaq.push(['_trackPageview']);
 // Functions
 function listener(message) {
   console.log(JSON.stringify(message));
-  persistTab(message.tabId, message.title);
+  if(message.shouldPersist) {
+    persistTab(message.tabId, message.title);
+  }
   chrome.tabs.sendMessage(message.tabId, message.title);
 }
 
@@ -33,6 +35,7 @@ function omniboxTrackingListener(title) {
 }
 
 function persistTab(tabId, title) {
+  console.log("Chrome Tab Renamer: Persisting Name");
   chrome.storage.sync.get('tabs', function(elem) {
     let tabs = elem.tabs
     if(!tabs) {

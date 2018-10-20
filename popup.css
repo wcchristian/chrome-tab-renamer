@@ -6,6 +6,10 @@ input {
     margin-top: 10px;
 }
 
+#persistBox {
+    margin-left: 5px;
+}
+
 .buttonContainer {
     display: flex;
     justify-content: center;
