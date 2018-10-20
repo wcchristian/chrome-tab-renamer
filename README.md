@@ -29,3 +29,11 @@ Title input
 Omnibox Support
 
 ![Image of Omnibox](screenshots/omnibox.png)
+
+# Development
+To build the extension from deployment, run:
+```sh
+./build.sh
+```
+
+When adding new files to the build, you musht add them to the build.txt file.
