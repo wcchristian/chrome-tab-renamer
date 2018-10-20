@@ -12,6 +12,7 @@ _gaq.push(['_trackPageview']);
 // Functions
 function listener(message) {
   console.log(JSON.stringify(message));
+  persistTab(message.tabId, message.title);
   chrome.tabs.sendMessage(message.tabId, message.title);
 }
 
@@ -21,6 +22,8 @@ function omniboxListener(title) {
     currentWindow: true
   }, function(tabs) {
     var tab = tabs[0];
+
+    persistTab(tab.id, title);
     chrome.tabs.sendMessage(tab.id, title);
   });
 }
@@ -29,10 +32,32 @@ function omniboxTrackingListener(title) {
   _gaq.push(['_trackEvent', 'changeTabName', 'omniboxEnter']);
 }
 
+function persistTab(tabId, title) {
+  let tabs = sessionStorage.getItem("tabs");
+  if(!tabs) {
+      tabs = {};
+  }
+
+  tabs[tabId] = title;
+
+  chrome.storage.sync.set({tabs: tabs}, function() {
+    console.log('Chrome Tab Renamer: The Tab is stored');
+  });
+}
+
+function updatedListener(tabId) {
+  chrome.storage.sync.get('tabs', function(elem) {
+    if(elem.tabs.hasOwnProperty(tabId)) {
+      chrome.tabs.sendMessage(tabId, elem.tabs[tabId]);
+    }
+  });
+}
+
 // Listeners
 chrome.omnibox.onInputChanged.addListener(omniboxListener);
 chrome.omnibox.onInputEntered.addListener(omniboxTrackingListener);
 chrome.runtime.onMessage.addListener(listener);
+chrome.tabs.onUpdated.addListener(updatedListener);
 
 chrome.runtime.onInstalled.addListener(function() {
   alert("Please reload each tab or restart your browser after installation of Chrome Tab Renamer");
