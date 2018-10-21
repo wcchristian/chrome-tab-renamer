@@ -2,12 +2,17 @@ input {
     margin-bottom: 10px;
 }
 
+.icon {
+    color: red;
+} 
+
 #removeButton {
     margin-top: 10px;
 }
 
 #persistBox {
     margin-left: 5px;
+    margin-top: 5px;
 }
 
 .buttonContainer {

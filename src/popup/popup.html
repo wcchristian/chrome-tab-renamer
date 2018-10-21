@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="popup.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <span class="navbar-brand mb-0 h1">Chrome Tab Renamer</span>
+    </nav>
+    <div class="col-10 offset-1 text-center">
+        <form id="tabForm">
+          <input class="form-control form-control-sm" placeholder="Enter Tab Name..." id="tabNameInput" type="text" autofocus>
+          <div class="buttonContainer">
+            <label for="persistBox">Persist</label>
+            <input id="persistBox" type="checkbox" checked> 
+          </div>
+          <div class="buttonContainer">
+            <button class="btn btn-primary" id="changeNameButton" type="submit"><span class="oi oi-circle-check"></span> Change Tab Name</button>
+          </div>
+        </form>
+        <div class="buttonContainer">
+            <button class="btn btn-primary" id="removeButton" type="button"><span class="oi oi-trash"></span> Remove/Refresh</button>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

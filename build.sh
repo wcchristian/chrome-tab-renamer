@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-version=`cat version.txt`
+version='1_0_0'
 builddir='builds'
 name=chrome-tab-renamer_${version}
 
 mkdir ${builddir}
-zip ${builddir}/${name} -@ < build.txt
+cd src
+zip -r ../${builddir}/${name} *

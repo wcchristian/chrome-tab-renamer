@@ -17,18 +17,29 @@ This chrome extension can make use of the omnibox with the prefix ctr
 ## Hotkey
 The default chrome hotkey is Ctrl/Command+E
 
+## Persistance
+By selecting the persist option, this extension will persist your tab rename even if you navigate to a different page in your tab.
+
+Un-selecting this option means that any pageload will remove your option.
+
+## Options
+The options menu allows you to view all of your current renames, delete them, clear all of them, etc.
+
 # Screenshots
-Named Tabs
+## Named Tabs
 
 ![Image of Tabs](screenshots/tabs.png)
 
-Title input
+## Title input
 
 ![Image of Input](screenshots/enter.png)
 
-Omnibox Support
+## Omnibox Support
 
 ![Image of Omnibox](screenshots/omnibox.png)
+
+## Options Support
+![Image of Options](screenshots/options.png)
 
 # Development
 ## Build
@@ -37,7 +48,10 @@ To build the extension from deployment, run:
 ./build.sh
 ```
 
-When adding new files to the build, you must add them to the build.txt file.
+To clean the repository from build artifacts, run:
+```sh
+./clean.sh
+```
 
 ## Versioning
-When adding a new version, make sure to update manifest.json and version.txt
+When adding a new version, make sure to update manifest.json and build.sh

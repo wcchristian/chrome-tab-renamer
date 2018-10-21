@@ -17,7 +17,7 @@ let removeButton = document.getElementById("removeButton");
 let persistCheckbox = document.getElementById("persistBox");
 let shouldPersist = true;
 
-// Event Functions
+// Listeners
 changeNameButton.onclick = function(element) {
   changeTabName();
 };
@@ -38,6 +38,7 @@ document.onload = function() {
   })
 }
 
+// Functions
 function changeTabName() {
   _gaq.push(['_trackEvent', 'changeTabName', "popup"]);
   let title = tabNameElem.value;
