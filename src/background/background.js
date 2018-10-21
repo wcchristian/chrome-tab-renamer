@@ -14,10 +14,14 @@ chrome.omnibox.onInputChanged.addListener(omniboxListener);
 chrome.omnibox.onInputEntered.addListener(omniboxTrackingListener);
 chrome.runtime.onMessage.addListener(listener);
 chrome.tabs.onUpdated.addListener(updatedListener);
+chrome.tabs.onRemoved.addListener(tabClosedListener);
+chrome.windows.onRemoved.addListener(windowClosedListener);
 
 chrome.runtime.onInstalled.addListener(function() {
-  alert("Please reload each tab or restart your browser after installation of Chrome Tab Renamer");
+  loadContentScript();
 });
+
+chrome.runtime.onStartup.addListener(chromeStartListener);
 
 // Functions
 function listener(message) {
@@ -63,8 +67,50 @@ function persistTab(tabId, title) {
 
 function updatedListener(tabId) {
   chrome.storage.sync.get('tabs', function(elem) {
-    if(elem.tabs.hasOwnProperty(tabId)) {
-      chrome.tabs.sendMessage(tabId, elem.tabs[tabId]);
+    if(elem.tabs) {
+      if(elem.tabs.hasOwnProperty(tabId)) {
+        chrome.tabs.sendMessage(tabId, elem.tabs[tabId]);
+      }
     }
   });
+}
+
+function tabClosedListener(tabId, removeInfo) {
+  removeTab(tabId);
+}
+
+function windowClosedListener(windowId) {
+  chrome.storage.sync.remove("tabs");
+}
+
+function chromeStartListener() {
+  chrome.storage.sync.remove("tabs");
+}
+
+function removeTab(tabId) {
+  _gaq.push(['_trackEvent', 'removeTabOnClose', "browser"]);
+
+  chrome.storage.sync.get('tabs', function(elem) {
+    if(elem.tabs) {
+      let tabs = elem.tabs
+      delete tabs[tabId];
+      
+      chrome.storage.sync.set({tabs: tabs}, function() {
+          console.log('Chrome Tab Renamer: The Tab is removed by close');
+      });
+    }
+  });
+}
+
+function loadContentScript() {
+  chrome.tabs.query({}, function(tabs) {
+    debugger;
+    console.log(JSON.stringify(tabs));
+    tabs.forEach(tab => {
+      debugger;
+      if(tab.url.startsWith("http://") || tab.url.startsWith("https://")) {
+        chrome.tabs.executeScript(tab.id, {file: './content/content.js'});
+      }
+    })
+  })
 }
