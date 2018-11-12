@@ -13,11 +13,17 @@ jobs:
           name: Run Build Script
           command: './build.sh'
 
-  artifact:
+  build_artifact:
     docker:
       - image: circleci/node
-
     steps:
+      - checkout
+      - run:
+          name: Clean Build Directory
+          command: './clean.sh'
+      - run:
+          name: Run Build Script
+          command: './build.sh'
       - store_artifacts:
           path: builds
           prefix: build
@@ -26,10 +32,11 @@ workflows:
   version: 2
   build:
     jobs:
-      - build
-      - artifact:
-          requires:
-            - build
+      - build:
+          filters:
+            branches:
+              ignore: master
+      - build_artifact:
           filters:
             branches:
               only: master

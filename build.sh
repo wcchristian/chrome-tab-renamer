@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version='1_1_2'
+version='1_3'
 builddir='builds'
 name=chrome-tab-renamer_${version}
 
