@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-pr:
+  build:
     docker:
       - image: circleci/node
 
@@ -13,28 +13,23 @@ jobs:
           name: Run Build Script
           command: './build.sh'
 
-  build-prod:
+  artifact:
     docker:
       - image: circleci/node
 
     steps:
-      - checkout
-      - run:
-          name: Clean Build Directory
-          command: './clean.sh'
-      - run:
-          name: Run Build Script
-          command: './build.sh'
       - store_artifacts:
           path: builds
           prefix: build
 
 workflows:
   version: 2
-  pr-build:
+  build:
     jobs:
-      - build-pr
-      - build-prod:
+      - build
+      - artifact:
+          requires:
+            - build
           filters:
             branches:
               only: master
