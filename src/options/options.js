@@ -64,7 +64,7 @@ function removeAndRefresh(event) {
   
     chrome.storage.sync.get('tabs', function(elem) {
         let tabs = elem.tabs
-        delete tabs[tabId];
+        delete tabs[tabId.trim()];
         
         chrome.storage.sync.set({tabs: tabs}, function() {
             console.log('Chrome Tab Renamer: The Tab is removed');
