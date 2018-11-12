@@ -1,3 +1,4 @@
+Develop Build: [![CircleCI](https://circleci.com/gh/wcchristian/chrome-tab-renamer/tree/develop.svg?style=svg)](https://circleci.com/gh/wcchristian/chrome-tab-renamer/tree/develop)
 # Chrome Tab Renamer
 A tab renamer extension for google chrome. This extension will allow you 
 
