@@ -46,6 +46,7 @@ function changeTabName() {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.runtime.sendMessage({tabId: tabs[0].id, title: title, shouldPersist: shouldPersist});
   });
+  window.close();
 }
 
 function removeAndRefresh() {
