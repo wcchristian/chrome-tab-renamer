@@ -2,7 +2,7 @@ version: 2
 jobs:
   build-pr:
     docker:
-      - image: circleci/node:4.8.2-jessie
+      - image: circleci/node
 
     steps:
       - checkout
@@ -15,7 +15,7 @@ jobs:
 
   build-prod:
     docker:
-      - image: circleci/node:4.8.2-jessie
+      - image: circleci/node
 
     steps:
       - checkout
