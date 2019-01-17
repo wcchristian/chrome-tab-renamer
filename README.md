@@ -1,6 +1,6 @@
 Develop Build: [![CircleCI](https://circleci.com/gh/wcchristian/chrome-tab-renamer/tree/develop.svg?style=svg)](https://circleci.com/gh/wcchristian/chrome-tab-renamer/tree/develop)
 # Chrome Tab Renamer
-A tab renamer extension for google chrome. This extension will allow you 
+A tab renamer extension for google chrome. This extension will allow you to choose a new name for your tab, this can be useful if you have the same web app open in multiple tabs.
 
 ## Tutorial
 For practice, I included the chrome extension tutorial in the tutorial folder of this repo.
